@@ -1,2 +1,2 @@
-# redsqaureFrontend
+# redsquareFrontend
 Technical test front-end
