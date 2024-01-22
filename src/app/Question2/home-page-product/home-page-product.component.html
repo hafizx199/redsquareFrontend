@@ -6,8 +6,8 @@
   <div class="">
     <p *ngIf="!authToken" class="text-lg font-bold">Login User</p>
 
-    <div class="mb-4 flex items-center" *ngIf="!authToken">
-      <div class="mr-2">
+    <div class="mb-4 items-center" *ngIf="!authToken">
+      <div class="m-2">
         <p class="text-gray-600 text-xs font-bold">User Name</p>
         <input
           [(ngModel)]="username"
@@ -16,7 +16,7 @@
         />
       </div>
 
-      <div class="mr-2">
+      <div class="m-2">
         <p class="text-gray-600 text-xs font-bold">Password (0lelplR)</p>
         <input
           [(ngModel)]="password"
@@ -27,7 +27,7 @@
 
       <button
         (click)="login()"
-        class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        class="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Login
       </button>
@@ -61,10 +61,10 @@
           <button
             [routerLink]="['/cart']"
             type="button"
-            class="flex ml-2 p-2 text-xs bg-gray-400 text-white rounded-md"
+            class="flex ml-2 p-2 text-md bg-gray-400 text-white rounded-md"
             (click)="filterItems()"
           >
-            View Cart
+            Cart
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -9,12 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FizzbuzzComponent } from './Question1/fizzbuzz/fizzbuzz.component';
 import { HomePageProductComponent } from './Question2/home-page-product/home-page-product.component';
+import { DetailProductComponent } from './Question2/detail-product/detail-product.component';
+import { MyCartComponent } from './Question2/my-cart/my-cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FizzbuzzComponent,
-    HomePageProductComponent
+    HomePageProductComponent,
+    DetailProductComponent,
+    MyCartComponent
   ],
   imports: [
     BrowserModule,
