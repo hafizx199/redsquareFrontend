@@ -1,0 +1,195 @@
+<h1 class="m-4 text-2xl font-bold">Technical test Front-End RedSquare</h1>
+
+<div
+  class="bg-gray-100 rounded-md p-4 flex flex-col items-start justify-left m-4"
+>
+  <div class="">
+    <p *ngIf="!authToken" class="text-lg font-bold">Login User</p>
+
+    <div class="mb-4 flex items-center" *ngIf="!authToken">
+      <div class="mr-2">
+        <p class="text-gray-600 text-xs font-bold">User Name</p>
+        <input
+          [(ngModel)]="username"
+          type="text"
+          class="p-2 border rounded-md"
+        />
+      </div>
+
+      <div class="mr-2">
+        <p class="text-gray-600 text-xs font-bold">Password (0lelplR)</p>
+        <input
+          [(ngModel)]="password"
+          type="password"
+          class="p-2 border rounded-md"
+        />
+      </div>
+
+      <button
+        (click)="login()"
+        class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Login
+      </button>
+    </div>
+
+    <div *ngIf="authToken" class="flex">
+      <div class="mb-4">
+        <div class="flex items-center">
+          <div class="flex">
+            <img
+              *ngIf="currentUser.image"
+              [src]="currentUser.image"
+              alt="Profile Image"
+              class="w-16 h-16 rounded-full object-cover mr-4"
+            />
+            <div>
+              <h2 class="text-lg font-semibold">
+                {{ currentUser.firstName }} {{ currentUser.lastName }}
+              </h2>
+              <p class="text-gray-600">{{ currentUser.email }}</p>
+            </div>
+          </div>
+          <button
+            (click)="logout()"
+            type="button"
+            class="ml-2 p-2 bg-red-500 text-white rounded-md"
+            (click)="filterItems()"
+          >
+            Logout
+          </button>
+          <button
+            [routerLink]="['/cart']"
+            type="button"
+            class="flex ml-2 p-2 text-xs bg-gray-400 text-white rounded-md"
+            (click)="filterItems()"
+          >
+            View Cart
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-4 border rounded-md bg-black w-full">
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+      <div class="flex items-center">
+        <input
+          (input)="filterItems()"
+          [(ngModel)]="searchTerm"
+          type="text"
+          class="w-full p-2 border rounded-md"
+        />
+        <button
+          type="button"
+          class="ml-2 p-2 bg-blue-500 text-white rounded-md"
+          (click)="filterItems()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Category</label>
+      <select
+        class="w-full p-2 border rounded-md"
+        (change)="filterItems()"
+        [(ngModel)]="selectedCategory"
+      >
+        <option value="">All</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">Sort</label>
+      <select
+        class="w-full p-2 border rounded-md"
+        (change)="filterItems()"
+        [(ngModel)]="sortprice"
+      >
+        <option value="">Any</option>
+        <option value="highest">Highest price</option>
+        <option value="lowest">Lowest price</option>
+      </select>
+    </div>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+    >
+      <div
+        *ngFor="
+          let product of filteredItems
+            | paginate
+              : { id: 'pagination', itemsPerPage: 10, currentPage: currentPage }
+        "
+        class="border p-4 rounded-md shadow-md"
+      >
+        <div [routerLink]="['/detail', product.id]">
+          <div class="flex overflow-x-auto space-x-4">
+            <div
+              class="w-32 h-32 flex-shrink-0"
+              *ngFor="let productImage of product.images"
+            >
+              <img
+                [src]="productImage"
+                alt="Product Image"
+                class="w-32 h-32 object-cover mb-4"
+              />
+            </div>
+          </div>
+
+          <h2 class="text-lg font-semibold">{{ product.title }}</h2>
+          <p class="text-gray-600">{{ product.description }}</p>
+          <p class="text-green-600 font-bold mt-2">
+            Price: ${{ product.price }}
+          </p>
+          <p class="text-gray-600">Rating: {{ product.rating }}</p>
+          <p class="text-gray-600">Stock: {{ product.stock }}</p>
+          <p class="text-gray-600">Brand: {{ product.brand }}</p>
+          <p class="text-gray-600">Category: {{ product.category }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="filteredItems.length == 0" class="">
+        <p class="text-base leading-relaxed text-center">
+          No matching products found...
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="flex w-full my-2">
+    <pagination-controls
+      id="pagination"
+      (pageChange)="currentPage = $event"
+      class="mx-auto"
+    ></pagination-controls>
+  </div>
+</div>
+
+<div class="mb-12 w-full flex justify-center">
+  <button
+    [routerLink]="['/']"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+  >
+    Go back to Question 1
+  </button>
+</div>

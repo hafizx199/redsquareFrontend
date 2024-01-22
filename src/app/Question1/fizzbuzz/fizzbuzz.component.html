@@ -1,29 +1,35 @@
 <h1 class="m-4 text-2xl font-bold">Technical test Front-End RedSquare</h1>
-<div class="bg-gray-100 rounded-md p-4 flex flex-col items-start justify-left m-4">
+<div
+  class="bg-gray-100 rounded-md p-4 flex flex-col items-start justify-left m-4"
+>
   <p class="text-lg font-bold">Question 1: FizzBuzz</p>
 
-  <div class="flex"> 
-    <input  [(ngModel)]="input_Q1" type="number"  class="p-2 border rounded-md mr-2">
-    <button (click)="fizzBuzz(input_Q1)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  <div class="flex">
+    <input
+      [(ngModel)]="input_Q1"
+      type="number"
+      class="p-2 border rounded-md mr-2"
+    />
+    <button
+      (click)="fizzBuzz(input_Q1)"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
       Enter
     </button>
   </div>
   <p class="text-md">Output:</p>
-  <div class="p-4 border rounded-md bg-black w-full ">
+  <div class="p-4 border rounded-md bg-black w-full">
     <div class="text-white" *ngFor="let result of fizzBuzzResults">
       {{ result }}
     </div>
   </div>
-
 </div>
 
-<div class="w-full flex justify-center ">
-
-  <button [routerLink]="['/products']" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    Go to page Question 2 
+<div class="w-full flex justify-center">
+  <button
+    [routerLink]="['/products']"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+  >
+    Go to page Question 2
   </button>
-
 </div>
-
-
-
